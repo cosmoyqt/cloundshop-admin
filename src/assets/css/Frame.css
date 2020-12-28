@@ -1,0 +1,16 @@
+
+.site-layout-background {
+  background: #fff;
+}
+.logo img{
+  width: 220px;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.header .right {
+  margin-right: 50px;
+  text-align: center;
+  color: #fcfcfc;
+}
