@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Button, Form, Input, message } from 'antd'
-import Upload from '../../components/Upload';
+import Upload from '@/components/Upload';
 function Edit () {
   const [form] = Form.useForm();
   const [imgList,setImgList] = React.useState([]);

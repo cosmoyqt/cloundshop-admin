@@ -6,7 +6,7 @@ import logo from '../../assets/images/logo.png';
 import { adminRoutes } from '../../routes'
 import * as Icon from '@ant-design/icons';
 const { Header, Content, Sider } = Layout;
-const routers = adminRoutes.filter(route => route.isShow)
+const { SubMenu } = Menu;
 function Index (props) {
   const handleClick = (e) => {
     if(e.key === 'logOut'){
@@ -15,6 +15,26 @@ function Index (props) {
       message.info(e.key)
     }
   }
+function renderMenu (data){
+  data = data.filter(route => route.isShow)
+    return data.map(item => {
+      //如果item有子元素,遍历自己,再次调用,直到子节点加载完毕
+      if (item.children) {
+        return (
+          <SubMenu title={item.title} key={item.path}>
+            {renderMenu(item.children)}
+          </SubMenu>
+        );
+      }
+      return (
+        <Menu.Item key={item.path} onClick={(e)=> props.history.push(e.key)}>
+          {React.createElement(Icon[item.icon], {
+          })}
+          {item.title}
+        </Menu.Item>
+      )
+    });
+}
   const popMenu = (
     <Menu onClick={(e)=>handleClick(e)}>
       <Menu.Item key="noti">通知中心</Menu.Item>
@@ -46,21 +66,13 @@ function Index (props) {
         <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
           <Sider className="site-layout-background" width={200}>
             <Menu
-              mode="inline"
+              mode="vertical"
               defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
+              defaultOpenKeys={['/admin/dashboroad']}
               style={{ height: '100%' }}
             >
               {
-                routers.map(route => {
-                  return (
-                    <Menu.Item key={route.path} onClick={e => { props.history.push(e.key) }}>
-                      {React.createElement(Icon[route.icon], {
-                      })}
-                      {route.title}
-                    </Menu.Item>
-                  )
-                })
+                renderMenu(adminRoutes)
               }
             </Menu>
           </Sider>

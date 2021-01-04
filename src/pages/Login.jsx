@@ -4,25 +4,16 @@ import { Form, Input, Button, Checkbox ,message} from 'antd';
 import '../assets/css/Login.scss'
 import {setToken,setSessionStorageToken} from '../utils/auth'
 import { UserOutlined ,LockOutlined } from '@ant-design/icons';
+import axios from '../utils/api';
 function Login (props) {
   const [form] = Form.useForm();
-  const [user,setUser] = useState({userName:'yqt',password: 'admin'})
   const handleSubmit = e => {
     e.preventDefault();
     form.validateFields().then(res => {
-      console.log(res);
-      if(res.userName === user.userName ){
-        if(res.password === user.password){
-          if(res.remember === true){
-            setToken('admin',props);
-          } else {
-            setSessionStorageToken('admin',props)
-          }
-        } else {
-          message.error('密码不正确')
-        }
+      if(res.remember === true){
+        setToken('admin',props);
       } else {
-        message.error('账号不正确')
+        setSessionStorageToken('admin',props)
       }
     })
       .catch(error => {

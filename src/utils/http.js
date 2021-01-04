@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { message } from 'antd';
 
-axios.defaults.baseURL ='http://localhost:3000';
+axios.defaults.baseURL ='http://127.0.0.1:7001/';
 axios.defaults.withCredentials = true;
 // 请求超时时间
 axios.defaults.timeout = 60000;
@@ -25,7 +25,7 @@ axios.interceptors.request.use(
 // 响应拦截器
 axios.interceptors.response.use(
     response => {
-        if (response.status === 200) {
+        if (response.data.code === 0) {
             if (response.request.responseURL.indexOf('/login') === -1) {
                 return Promise.resolve(response);
             }
@@ -88,8 +88,8 @@ export function get(url, params) {
             params
             })
             .then(res => {
-                if(res.data.status === 200){
-                    resolve(res.data.result);
+                if(res.data.code === 0){
+                    resolve(res.data);
                 }
             })
             .catch(err => {
@@ -102,10 +102,8 @@ export function get(url, params) {
  * @param {String} url [请求的url地址] 
  * @param {Object} params [请求时携带的参数] 
  */
-export function post(url, params, headers, loading) {
+export function post(url, params, headers) {
     return new Promise((resolve, reject) => {
-        if (!loading) {
-        }
         //const session = store.getters['auth/userStore/getSession'];
         // util.setCookie('JSESSIONID', session)
         axios.post(url, params, {
@@ -115,7 +113,7 @@ export function post(url, params, headers, loading) {
                 }
             })
             .then(res => {
-                if (res.data.code === 200) {
+                if (res.data.code === 0) {
                     resolve(res.data);
                 }
             })
