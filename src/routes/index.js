@@ -3,8 +3,8 @@ import Index from '@/pages/dashboard/Index'
 import products from '@/pages/products/List'
 import productsEdit from '@/pages/products/Edit'
 import PageNoFound from '@/pages/PageNoFound';
-import Category from '@/pages/category/List.jsx'
-import CategoryEdit from '@/pages/category/Edit'
+import Category from '@/pages/category/List'
+import SecondaryCategory from '@/pages/category/SecondaryCategoryList'
 export const mainRoutes = [{
     path: "/login",
     component: Login
@@ -15,7 +15,8 @@ export const mainRoutes = [{
   },
 ]
 
-export const adminRoutes = [{
+export const adminRoutes = [
+  {
   path: '/admin/dashboroad',
   component: Index,
   title: "看板页",
@@ -44,17 +45,17 @@ export const adminRoutes = [{
     {
       path: '/admin/category',
       component: Category,
-      title: '分类列表',
+      title: '一级分类',
+      exact: true,
+      icon: 'ShopOutlined',
+      isShow: true,
+    }, {
+      path: '/admin/secondaryCategory',
+      component: SecondaryCategory,
+      title: '二级分类',
       exact: true,
       icon: 'ShopOutlined',
       isShow: true,
     },
-    {
-      path: '/admin/CategoryEdit/:id?',
-      component: CategoryEdit,
-      title: "编辑分类",
-      icon: 'ShopOutlined',
-      isShow: false,
-    }
   ]
 }, ]

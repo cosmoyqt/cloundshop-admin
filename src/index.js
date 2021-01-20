@@ -5,7 +5,10 @@ import App from './App';
 import  './assets/css/App.css';
 import { BrowserRouter as Router ,Switch, Route,Redirect} from 'react-router-dom';
 import { mainRoutes } from './routes'
+import store from './store'
+import {Provider} from 'react-redux'
 ReactDOM.render(
+  <Provider store={store}>
   <Router>
       <Switch>
         <Route path="/admin" render={routeProps => <App {...routeProps} />} />
@@ -15,6 +18,7 @@ ReactDOM.render(
         <Redirect to='/admin' from="/" />
         <Redirect to='/404' />
   </Switch>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );

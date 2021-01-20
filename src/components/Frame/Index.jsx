@@ -1,8 +1,9 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Dropdown, message } from 'antd';
+import { Layout, Menu, Dropdown, message } from 'antd';
 import { withRouter } from 'react-router-dom'
 import '../../assets/css/Frame.css'
 import logo from '../../assets/images/logo.png';
+import Breadcrumb from '../Breadcrumb';
 import { adminRoutes } from '../../routes'
 import * as Icon from '@ant-design/icons';
 const { Header, Content, Sider } = Layout;
@@ -58,17 +59,11 @@ function renderMenu (data){
         </Dropdown>
       </Header>
       <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumb />
         <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
           <Sider className="site-layout-background" width={200}>
             <Menu
               mode="vertical"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['/admin/dashboroad']}
               style={{ height: '100%' }}
             >
               {
