@@ -20,5 +20,11 @@ export default {
     getProduct: opt => get(`/admin/getProduct/${opt}`), //获取单个产品
     updateProduct: opt => post("/admin/updateProduct",opt), // 修改
     deleteProduct: opt => get(`/admin/deleteProduct/${opt}`), //删除产品
+  },
+  activity:{
+    getDannerList:opt => get('/admin/getBanner'), // 获取banner位置的图片
+    deleteBanner: opt => get(`/admin/deleteBanner/${opt}`), //删除banner
+    addBanner: opt => post("/admin/addBanner",opt), // 增加banner
+    updateBannerById: opt => post("/admin/updateBanner",opt), // 修改
   }
 }
